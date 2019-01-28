@@ -1,5 +1,6 @@
 //NODE MODULES
 const pgp = require('pg-promise')({});
+
     //same as const app = pgp();
 const db = pgp('postgres://localhost/blog');
 
@@ -11,9 +12,14 @@ PublicUserService.createUser = (username, email, password) => {
 }
 //COME BACK
 PublicUserService.loginUser = (id) => {
-    return db.any('DELETE FROM pets WHERE id=${id}', {id})
+    return db.one('SELECT username, password FROM users WHERE id=${id}', {id})
 }
-PublicUserService.readUser = (user_id) => {
+
+//INSERT TOKEN ON USER -  BASED ON UUIDV TOKEN
+PublicUserService.insertToken = (token, id) => {
+    return db.none('UPDATE users SET token = ${token} WHERE id=${id}', {token, id})
+}
+ PublicUserService.readUser = (user_id) => {
     return db.any('SELECT * FROM users WHERE id=${user_id}', {user_id})
 }
 

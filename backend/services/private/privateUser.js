@@ -7,6 +7,10 @@ const db = pgp('postgres://localhost/blog');
 const PrivateUserService = {};
 
 //USER
+PrivateUserService.getToken = (id) => {
+    return db.one('SELECT token FROM users WHERE id=${id}', {id});
+}
+
 PrivateUserService.putUser = (user_id, username, email, password) => {
     return db.any('UPDATE users SET username=${username}, email=${email}, password=${password} WHERE id=${user_id}', {username, email, password, user_id});
 }

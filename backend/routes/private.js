@@ -1,6 +1,5 @@
 
 //NODE MODULES
-const bcrypt = require('bcrypt');
 const express = require('express');
 const privateRouter = express.Router();
 
@@ -8,7 +7,6 @@ const privateRouter = express.Router();
 const PrivateUserService = require('../services/private/privateUser');
 const PrivateCommentService = require('../services/private/privateComment');
 const PrivatePostService = require('../services/private/privatePost');
-
 
 
 //ROUTES

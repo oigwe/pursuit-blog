@@ -2,10 +2,9 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
-const uuidv1 = require('uuid/v1');
 const port = 6000;
 //DEVELOPER MODULES
-const {checkForToken} = require('./middleware');
+const {checkForToken, checkTokenCorrect} = require('./middleware');
 const privateRouter = require('./routes/private');
 const publicRouter = require('./routes/public');
 
@@ -18,7 +17,7 @@ app.use(bodyParser.json())
 
 // user routes
 app.use('/', publicRouter);
-app.use(checkForToken);
+app.use(checkForToken, checkTokenCorrect);
 app.use('/', privateRouter);
 
 app.use((req, res) =>{
